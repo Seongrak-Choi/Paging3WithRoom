@@ -1,16 +1,15 @@
-package com.fromu.paging3androomtoyproject
+package com.fromu.paging3androomtoyproject.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.fromu.paging3androomtoyproject.ui.theme.Paging3andRoomToyProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +18,32 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Paging3andRoomToyProjectTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MainScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MainScreen() {
+    val navHostController = rememberNavController()
+
+    Scaffold(
+        bottomBar = { MainBottomNavigation(navHostController) }
+    ) {
+        MainView(it, navHostController)
+    }
+}
+
+@Composable
+fun MainView(paddingValues: PaddingValues, navHostController: NavHostController) {
+    MainBottomNavGraph(paddingValues, navHostController)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Paging3andRoomToyProjectTheme {
-        Greeting("Android")
+        MainScreen()
     }
 }
