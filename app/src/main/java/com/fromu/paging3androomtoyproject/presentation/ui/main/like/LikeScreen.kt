@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.ui.main.like
+package com.fromu.paging3androomtoyproject.presentation.ui.main.like
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues

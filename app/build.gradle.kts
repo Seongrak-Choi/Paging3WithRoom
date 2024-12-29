@@ -1,13 +1,25 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
+
+val localProperties = Properties()
+localProperties.load(FileInputStream(rootProject.file("local.properties")))
+
 
 android {
     namespace = "com.fromu.paging3androomtoyproject"
     compileSdk = 35
 
     defaultConfig {
+        buildFeatures {
+            buildConfig = true
+        }
         applicationId = "com.fromu.paging3androomtoyproject"
         minSdk = 30
         targetSdk = 34
@@ -21,6 +33,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "PEXELS_API_KEY", localProperties.getProperty("PEXELS_API_KEY"))
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -57,7 +72,18 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation("androidx.navigation:navigation-compose:2.7.3")
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+
+    implementation (libs.moshi.kotlin)
+    implementation (libs.retrofit)
+    implementation (libs.converter.moshi)
+    implementation (libs.okhttp3.logging.interceptor)
+
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -66,5 +92,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
 
+//hilt +
+kapt {
+    correctErrorTypes = true
 }

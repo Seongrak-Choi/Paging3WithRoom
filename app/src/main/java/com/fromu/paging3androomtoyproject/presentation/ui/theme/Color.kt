@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.ui.theme
+package com.fromu.paging3androomtoyproject.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

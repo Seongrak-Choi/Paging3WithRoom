@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.ui.main.home
+package com.fromu.paging3androomtoyproject.presentation.ui.main.dislike
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeScreen(paddingValues: PaddingValues) {
+fun DisLikeScreen(paddingValues: PaddingValues) {
     Box(modifier = Modifier.padding(paddingValues)) {
-        Text("HomeScreen")
+        Text("DisLikeScreen")
     }
 }

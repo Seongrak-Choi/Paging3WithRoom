@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.ui.theme
+package com.fromu.paging3androomtoyproject.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

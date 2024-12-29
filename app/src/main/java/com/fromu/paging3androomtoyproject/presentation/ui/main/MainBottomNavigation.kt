@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.ui.main
+package com.fromu.paging3androomtoyproject.presentation.ui.main
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
