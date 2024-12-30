@@ -74,16 +74,23 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
 
+    //hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation (libs.androidx.hilt.navigation.compose)
 
+    //api
     implementation (libs.moshi.kotlin)
     implementation (libs.retrofit)
     implementation (libs.converter.moshi)
     implementation (libs.okhttp3.logging.interceptor)
 
+    //image
     implementation(libs.coil.compose)
+
+    //paging3
+    implementation(libs.androidx.paging.runtime) // Runtime
+    implementation(libs.androidx.paging.compose) // Compose 연동
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
