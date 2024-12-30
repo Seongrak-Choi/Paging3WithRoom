@@ -8,51 +8,57 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.fromu.paging3androomtoyproject.domain.model.Photo
 import com.fromu.paging3androomtoyproject.domain.utils.Result
 import com.fromu.paging3androomtoyproject.presentation.ui.component.ContentView
 import com.fromu.paging3androomtoyproject.presentation.ui.component.LoadingScreen
 import com.fromu.paging3androomtoyproject.presentation.viewmodel.MainViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(paddingValues: PaddingValues, vm: MainViewModel) {
     val photoList = remember { mutableStateListOf<Photo>() }
-
-    Init(vm)
-    HomeView(paddingValues, photoList)
+    HomeView(paddingValues, photoList, vm)
     ObservePhotos(vm, photoList)
 }
 
-@Composable
-fun Init(vm: MainViewModel) {
-    val scope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-        scope.launch {
-            vm.fetchPhotos()
-        }
-    }
-}
 
 @Composable
-fun HomeView(paddingValues: PaddingValues, photoList: MutableList<Photo>) {
-    Box(modifier = Modifier
-        .padding(paddingValues)
-        .fillMaxSize()) {
+fun HomeView(paddingValues: PaddingValues, photoList: MutableList<Photo>, vm: MainViewModel) {
+    val photoPagingItem = vm.pagingPhotos.collectAsLazyPagingItems()
+
+    Box(
+        modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxSize()
+    ) {
+
+        /*
+        paging3 사용하는 경우
+         */
         LazyColumn {
-            items(photoList) { photo ->
-                ContentView(photo)
+            items(photoPagingItem.itemCount) { index ->
+                val photo = photoPagingItem[index]
+                if (photo != null) {
+                    ContentView(photo)
+                }
             }
         }
+
+        /*
+        paging3 사용하지 않았을 경우
+         */
+//        LazyColumn {
+//            items(photoList) { photo ->
+//                ContentView(photo)
+//            }
+//        }
     }
 }
 

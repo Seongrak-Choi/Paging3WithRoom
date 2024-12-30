@@ -6,9 +6,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class PhotoDataSource @Inject constructor(
-    private val photoApi: PhotoApi
+    val photoApi: PhotoApi
 ) {
     suspend fun fetchPhotos(): Response<PhotoRes> {
-        return photoApi.getData()
+        return photoApi.getPhotos()
     }
 }

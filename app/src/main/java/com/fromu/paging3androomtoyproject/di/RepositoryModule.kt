@@ -1,6 +1,7 @@
 package com.fromu.paging3androomtoyproject.di
 
 import com.fromu.paging3androomtoyproject.data.datasource.remote.PhotoDataSource
+import com.fromu.paging3androomtoyproject.data.datasource.remote.PhotoPagingSourceFactory
 import com.fromu.paging3androomtoyproject.data.repository.PhotoRepoImpl
 import com.fromu.paging3androomtoyproject.domain.repository.PhotoRepo
 import dagger.Module
@@ -15,7 +16,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun providePhotoRepo(photoDataSource: PhotoDataSource): PhotoRepo {
-        return PhotoRepoImpl(photoDataSource)
+    fun providePhotoRepo(photoDataSource: PhotoDataSource, photoPagingSourceFactory: PhotoPagingSourceFactory): PhotoRepo {
+        return PhotoRepoImpl(photoDataSource, photoPagingSourceFactory)
     }
 }
