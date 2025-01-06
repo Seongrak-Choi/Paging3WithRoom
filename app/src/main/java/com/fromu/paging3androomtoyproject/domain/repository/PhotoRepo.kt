@@ -8,4 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface PhotoRepo {
     suspend fun getPhoto(): Flow<Result<List<Photo>>>
     fun getPagingPhoto(): Flow<PagingData<Photo>>
+
+
 }

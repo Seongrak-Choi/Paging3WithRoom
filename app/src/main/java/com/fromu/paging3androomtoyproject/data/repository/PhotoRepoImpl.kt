@@ -18,21 +18,9 @@ class PhotoRepoImpl @Inject constructor(
     private val photoDataSource: PhotoDataSource,
     private val photoPagingSourceFactory: PhotoPagingSourceFactory
 ) : PhotoRepo {
-    override suspend fun getPhoto(): Flow<Result<List<Photo>>> =
-        flow {
-            try {
-                emit(Result.Loading)
-                val response = photoDataSource.fetchPhotos()
-                if (response.isSuccessful) {
-                    val photos = response.body()?.photos?.map { it.toDomain() } ?: emptyList()
-                    emit(Result.Success(photos))
-                } else {
-                    emit(Result.Error("API Error: ${response.code()} ${response.message()}"))
-                }
-            } catch (e: Exception) {
-                emit(Result.Error("Network Exception: ${e.message}", e))
-            }
-        }
+    override suspend fun getPhoto(): Flow<Result<List<Photo>>> {
+        return photoDataSource.fetchPhotos()
+    }
 
     override fun getPagingPhoto(): Flow<PagingData<Photo>> {
         return Pager(
