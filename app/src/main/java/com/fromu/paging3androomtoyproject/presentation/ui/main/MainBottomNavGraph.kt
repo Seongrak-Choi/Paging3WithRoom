@@ -17,7 +17,7 @@ fun MainBottomNavGraph(paddingValues: PaddingValues, navController: NavHostContr
             HomeScreen(paddingValues, vm)
         }
         composable(MainBottomNavItem.Like.screenRoute) {
-            LikeScreen(paddingValues)
+            LikeScreen(paddingValues, vm)
         }
         composable(MainBottomNavItem.DisLike.screenRoute) {
             DisLikeScreen(paddingValues)

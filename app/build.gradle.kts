@@ -71,7 +71,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
+    implementation (libs.androidx.foundation)
+    implementation(libs.ui)
+    implementation(libs.androidx.material)
     implementation(libs.androidx.navigation.compose)
 
     //hilt
@@ -103,6 +105,7 @@ dependencies {
     //Room
     implementation (libs.androidx.room.runtime)
     kapt (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.ktx)
 }
 
 //hilt +

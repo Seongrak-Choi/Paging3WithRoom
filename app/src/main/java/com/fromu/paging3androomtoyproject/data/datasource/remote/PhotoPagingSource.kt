@@ -1,14 +1,14 @@
 package com.fromu.paging3androomtoyproject.data.datasource.remote
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.fromu.paging3androomtoyproject.data.network.api.PhotoApi
+import com.fromu.paging3androomtoyproject.data.remote.api.PhotoApi
 import com.fromu.paging3androomtoyproject.domain.model.Photo
 import com.fromu.paging3androomtoyproject.domain.model.toDomain
+import javax.inject.Inject
 
-class PhotoPagingSource(
-    private val photoApi: PhotoApi
-) : PagingSource<Int, Photo>() {
+class PhotoPagingSource @Inject constructor(private val photoApi: PhotoApi) : PagingSource<Int, Photo>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         return try {
             val currentPage = params.key ?: 1

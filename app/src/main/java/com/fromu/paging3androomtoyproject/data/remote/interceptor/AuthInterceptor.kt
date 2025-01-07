@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.data.network.interceptor
+package com.fromu.paging3androomtoyproject.data.remote.interceptor
 
 import android.util.Log
 import okhttp3.Interceptor

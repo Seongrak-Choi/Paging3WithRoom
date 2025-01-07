@@ -1,8 +1,8 @@
 package com.fromu.paging3androomtoyproject.di
 
 import com.fromu.paging3androomtoyproject.BuildConfig
-import com.fromu.paging3androomtoyproject.data.network.interceptor.AuthInterceptor
-import com.fromu.paging3androomtoyproject.data.network.api.PhotoApi
+import com.fromu.paging3androomtoyproject.data.remote.interceptor.AuthInterceptor
+import com.fromu.paging3androomtoyproject.data.remote.api.PhotoApi
 import com.fromu.paging3androomtoyproject.presentation.Utils.Const
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

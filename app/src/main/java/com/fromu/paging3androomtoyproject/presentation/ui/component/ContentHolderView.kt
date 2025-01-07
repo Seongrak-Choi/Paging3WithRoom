@@ -1,5 +1,7 @@
 package com.fromu.paging3androomtoyproject.presentation.ui.component
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
@@ -29,11 +32,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
-import com.fromu.paging3androomtoyproject.domain.model.Photo
+import com.fromu.paging3androomtoyproject.domain.model.PhotoWithLikeStatus
+import com.fromu.paging3androomtoyproject.presentation.Utils.noRippleClickableWithDelay
+import com.fromu.paging3androomtoyproject.presentation.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ContentView(photo: Photo) {
+fun ContentView(photo: PhotoWithLikeStatus, vm: MainViewModel) {
     val scope = rememberCoroutineScope()
     var isBottomSheetVisible by remember { mutableStateOf(false) }
 
@@ -44,7 +49,7 @@ fun ContentView(photo: Photo) {
                     //삭제 로직
                 }
             },
-            onDismiss = {isBottomSheetVisible = false}
+            onDismiss = { isBottomSheetVisible = false }
         )
     }
 
@@ -60,7 +65,7 @@ fun ContentView(photo: Photo) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(1f),
-                    model = photo.src,
+                    model = photo.photo.src,
                     loading = { //로딩화면 (placeHolder)
                         Box(
                             modifier = Modifier
@@ -71,7 +76,7 @@ fun ContentView(photo: Photo) {
                     error = {
                         Text(text = "이미지 로드 실패", modifier = Modifier.align(Alignment.Center))
                     },
-                    contentDescription = photo.id.toString(),
+                    contentDescription = photo.photo.toString(),
                     contentScale = ContentScale.Crop
                 )
 
@@ -97,15 +102,20 @@ fun ContentView(photo: Photo) {
                     )
 
                     Text(
-                        text = photo.photographer.toString(),
+                        text = photo.photo.photographer.toString(),
                         color = Color.Black,
                         fontSize = 12.sp,
                     )
                 }
 
                 Icon(
-                    modifier = Modifier.align(Alignment.CenterVertically).padding(5.dp),
-                    imageVector = Icons.Default.FavoriteBorder,
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .padding(5.dp)
+                        .noRippleClickableWithDelay {
+                            vm.toggleLike(photo)
+                        },
+                    imageVector = if (photo.isLiked) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "like"
                 )
             }
@@ -116,5 +126,5 @@ fun ContentView(photo: Photo) {
 @Preview(showBackground = true)
 @Composable
 fun ContentViewPreview() {
-    ContentView(Photo(1, "11", "aa"))
+//    ContentView(PhotoWithLikeStatus(Photo(1, "11", "aa"))
 }

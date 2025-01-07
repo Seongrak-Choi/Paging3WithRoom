@@ -1,6 +1,6 @@
 package com.fromu.paging3androomtoyproject.data.datasource.remote
 
-import com.fromu.paging3androomtoyproject.data.network.api.PhotoApi
+import com.fromu.paging3androomtoyproject.data.remote.api.PhotoApi
 import com.fromu.paging3androomtoyproject.domain.model.Photo
 import com.fromu.paging3androomtoyproject.domain.model.toDomain
 import com.fromu.paging3androomtoyproject.domain.utils.Result
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PhotoDataSource @Inject constructor(
-    val photoApi: PhotoApi
+    private val photoApi: PhotoApi
 ) {
     suspend fun fetchPhotos(): Flow<Result<List<Photo>>> =
         flow {

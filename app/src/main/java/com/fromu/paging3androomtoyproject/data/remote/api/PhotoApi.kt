@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.data.network.api
+package com.fromu.paging3androomtoyproject.data.remote.api
 
 import com.fromu.paging3androomtoyproject.data.model.PhotoRes
 import retrofit2.Response

@@ -1,5 +1,6 @@
 package com.fromu.paging3androomtoyproject.presentation.ui.main.home
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.fromu.paging3androomtoyproject.domain.model.Photo
+import com.fromu.paging3androomtoyproject.domain.model.PhotoWithLikeStatus
 import com.fromu.paging3androomtoyproject.domain.utils.Result
 import com.fromu.paging3androomtoyproject.presentation.ui.component.ContentView
 import com.fromu.paging3androomtoyproject.presentation.ui.component.LoadingScreen
@@ -23,15 +25,16 @@ import com.fromu.paging3androomtoyproject.presentation.viewmodel.MainViewModel
 
 @Composable
 fun HomeScreen(paddingValues: PaddingValues, vm: MainViewModel) {
-    val photoList = remember { mutableStateListOf<Photo>() }
-    HomeView(paddingValues, photoList, vm)
-    ObservePhotos(vm, photoList)
+//    val photoList = remember { mutableStateListOf<Photo>() }
+    HomeView(paddingValues, vm)
+//    ObservePhotos(vm, photoList)
 }
 
 
 @Composable
-fun HomeView(paddingValues: PaddingValues, photoList: MutableList<Photo>, vm: MainViewModel) {
+fun HomeView(paddingValues: PaddingValues, vm: MainViewModel) {
     val photoPagingItem = vm.pagingPhotos.collectAsLazyPagingItems()
+    val likedPhotos by vm.likedPhotosFlow.collectAsState()
 
     Box(
         modifier = Modifier
@@ -46,7 +49,8 @@ fun HomeView(paddingValues: PaddingValues, photoList: MutableList<Photo>, vm: Ma
             items(photoPagingItem.itemCount) { index ->
                 val photo = photoPagingItem[index]
                 if (photo != null) {
-                    ContentView(photo)
+                    val isLiked = likedPhotos.any { it.id == photo.photo.id}
+                    ContentView(PhotoWithLikeStatus(photo.photo, isLiked), vm)
                 }
             }
         }
@@ -62,21 +66,21 @@ fun HomeView(paddingValues: PaddingValues, photoList: MutableList<Photo>, vm: Ma
     }
 }
 
-@Composable
-fun ObservePhotos(vm: MainViewModel, photoList: MutableList<Photo>) {
-    val photoStatus by vm.photos.collectAsState()
-    val context = LocalContext.current
-    when (photoStatus) {
-        is Result.Success -> {
-            photoList.addAll((photoStatus as Result.Success<List<Photo>>).data.toMutableList())
-        }
-
-        is Result.Error -> {
-            Toast.makeText(context, "통신이 원활하지 않습니다. 잠시 후 시도해 주세요.", Toast.LENGTH_SHORT).show()
-        }
-
-        is Result.Loading -> {
-            LoadingScreen()
-        }
-    }
-}
+//@Composable
+//fun ObservePhotos(vm: MainViewModel, photoList: MutableList<Photo>) {
+//    val photoStatus by vm.photos.collectAsState()
+//    val context = LocalContext.current
+//    when (photoStatus) {
+//        is Result.Success -> {
+//            photoList.addAll((photoStatus as Result.Success<List<Photo>>).data.toMutableList())
+//        }
+//
+//        is Result.Error -> {
+//            Toast.makeText(context, "통신이 원활하지 않습니다. 잠시 후 시도해 주세요.", Toast.LENGTH_SHORT).show()
+//        }
+//
+//        is Result.Loading -> {
+//            LoadingScreen()
+//        }
+//    }
+//}
