@@ -1,26 +1,17 @@
 package com.fromu.paging3androomtoyproject.presentation.ui.main.home
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.fromu.paging3androomtoyproject.domain.model.Photo
 import com.fromu.paging3androomtoyproject.domain.model.PhotoWithLikeStatus
-import com.fromu.paging3androomtoyproject.domain.utils.Result
-import com.fromu.paging3androomtoyproject.presentation.ui.component.ContentView
-import com.fromu.paging3androomtoyproject.presentation.ui.component.LoadingScreen
+import com.fromu.paging3androomtoyproject.presentation.ui.component.MainContentView
 import com.fromu.paging3androomtoyproject.presentation.viewmodel.MainViewModel
 
 @Composable
@@ -49,8 +40,8 @@ fun HomeView(paddingValues: PaddingValues, vm: MainViewModel) {
             items(photoPagingItem.itemCount) { index ->
                 val photo = photoPagingItem[index]
                 if (photo != null) {
-                    val isLiked = likedPhotos.any { it.id == photo.photo.id}
-                    ContentView(PhotoWithLikeStatus(photo.photo, isLiked), vm)
+                    val isLiked = likedPhotos.any { it.id == photo.photo.id }
+                    MainContentView(PhotoWithLikeStatus(photo.photo, isLiked), vm)
                 }
             }
         }

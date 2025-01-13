@@ -71,7 +71,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation (libs.androidx.foundation)
+    implementation(libs.androidx.foundation)
     implementation(libs.ui)
     implementation(libs.androidx.material)
     implementation(libs.androidx.navigation.compose)
@@ -79,13 +79,13 @@ dependencies {
     //hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation (libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     //api
-    implementation (libs.moshi.kotlin)
-    implementation (libs.retrofit)
-    implementation (libs.converter.moshi)
-    implementation (libs.okhttp3.logging.interceptor)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.okhttp3.logging.interceptor)
 
     //image
     implementation(libs.coil.compose)
@@ -103,9 +103,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //Room
-    implementation (libs.androidx.room.runtime)
-    kapt (libs.androidx.room.compiler)
-    implementation (libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }
 
 //hilt +
