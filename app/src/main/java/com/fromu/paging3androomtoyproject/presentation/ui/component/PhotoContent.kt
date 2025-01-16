@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import com.fromu.paging3androomtoyproject.domain.model.PhotoWithLikeStatus
-import com.fromu.paging3androomtoyproject.presentation.Utils.noRippleClickableWithDelay
+import com.fromu.paging3androomtoyproject.presentation.utils.noRippleClickableWithDelay
 
 @Composable
 fun PhotoContent(

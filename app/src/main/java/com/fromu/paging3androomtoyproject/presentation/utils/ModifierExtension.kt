@@ -1,4 +1,4 @@
-package com.fromu.paging3androomtoyproject.presentation.Utils
+package com.fromu.paging3androomtoyproject.presentation.utils
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

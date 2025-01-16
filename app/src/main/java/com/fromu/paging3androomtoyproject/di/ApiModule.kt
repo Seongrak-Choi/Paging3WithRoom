@@ -3,7 +3,7 @@ package com.fromu.paging3androomtoyproject.di
 import com.fromu.paging3androomtoyproject.BuildConfig
 import com.fromu.paging3androomtoyproject.data.remote.interceptor.AuthInterceptor
 import com.fromu.paging3androomtoyproject.data.remote.api.PhotoApi
-import com.fromu.paging3androomtoyproject.presentation.Utils.Const
+import com.fromu.paging3androomtoyproject.presentation.utils.Const
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
